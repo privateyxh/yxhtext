@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.googol.han.company.dao.CompanyDao">
+	<!-- 全查询 -->
+	<select id="finallBuCompany" resultType="map">
+		select * from googol_Company
+	</select>
+	<!-- 更新 -->
+	<update id="updateCompany"  keyProperty="companyId" parameterType="com.googol.han.entity.Company">
+	update (select * from googol_Company where companyId=#{companyId}) set companyName=#{companyName},companyUser=#{companyUser},companyPhone=#{companyPhone},companyAddress=#{companyAddress},companyState=#{companyState},companyExplain=#{companyExplain}
+	</update>
+	<!-- 添加 -->
+	<insert id="addCompany"  keyProperty="companyId" parameterType="com.googol.han.entity.Company">
+	
+	insert into googol_Company values(#{companyId},#{companyName},#{companyUser},#{companyPhone},#{companyAddress},#{companyState},#{companyExplain})
+	</insert>
+	
+	<!-- 根据ID和name -->
+	<select id="finBycompanyIdorcompanyName"  resultType="com.googol.han.entity.Company"  parameterType="com.googol.han.entity.Company">
+	 SELECT * FROM googol_Company WHERE companyName=#{companyName,jdbcType=VARCHAR} or companyId=#{companyId,jdbcType=VARCHAR}
+	</select>
+
+<select id="page" resultType="map" parameterType="string">
+		 <![CDATA[
+            ${value} 
+          ]]>
+	</select>
+</mapper>

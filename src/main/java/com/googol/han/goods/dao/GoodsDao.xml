@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.googol.han.goods.dao.GoodsDao">
+
+	
+	
+
+	<!-- 全查询 -->
+	<select id="findAllByGoods" resultType="map">
+		select * from googol_goods
+	</select>
+	
+	<!-- 分页 -->
+	<select id="page" resultType="map" parameterType="string">
+		 <![CDATA[
+            ${value} 
+          ]]>
+	</select>
+	
+	
+	<!-- 更新 -->
+	<update id="updateByGoods"  keyProperty="goodsId" parameterType="com.googol.han.entity.Goods">
+	update (select * from googol_goods where goodId=#{goodId}) set goodName=#{goodName},goodNumber=#{goodNumber},goodType=#{goodType},goodPrice=#{goodPrice},goodState=#{goodState},goodExplain=#{goodExplain}
+	</update>
+	<!-- 添加 -->
+	<insert id="addByGoods"  keyProperty="goodsId" parameterType="com.googol.han.entity.Goods">
+	
+	insert into googol_goods values(#{goodId},#{goodName},#{goodNumber},#{goodType},#{goodPrice},#{goodState},#{goodExplain})
+	</insert>
+	<!-- 根据ID和name -->
+	<select id="findByGoodsIdAndGoodsName"  resultType="com.googol.han.entity.Goods"  parameterType="com.googol.han.entity.Goods">
+	 SELECT * FROM googol_goods WHERE goodName=#{goodName,jdbcType=VARCHAR} or goodId=#{goodId,jdbcType=VARCHAR}
+	</select>
+</mapper>

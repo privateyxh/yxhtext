@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.googol.han.depot.dao.DepotDao">
+
+	
+	
+
+	<!-- 全查询 -->
+	<select id="findAllByDepot" resultType="map">
+		select * from googol_depot
+	</select>
+	
+	<!-- 分页 -->
+	<select id="page" resultType="map" parameterType="string">
+		 <![CDATA[
+            ${value} 
+          ]]>
+	</select>
+	
+	
+	<!-- 更新 -->
+	<update id="updateByDepot"  keyProperty="depotId" parameterType="com.googol.han.entity.Depot">
+	update (select * from googol_depot where depotId=#{depotId}) set depotName=#{depotName},depotAddress=#{depotAddress},depotUser=#{depotUser},depotUserPhone=#{depotUserPhone},depotState=#{depotState},depotExplain=#{depotExplain}
+	</update>
+	<!-- 添加 -->
+	<insert id="addByDepot"  keyProperty="depotId" parameterType="com.googol.han.entity.Depot">
+	
+	insert into googol_depot values(#{depotId},#{depotName},#{depotAddress},#{depotUser},#{depotUserPhone},#{depotState},#{depotExplain})
+	</insert>
+	
+	<!-- 根据ID和name -->
+	<select id="findBydepotIdAnddepotName"  resultType="com.googol.han.entity.Depot"  parameterType="com.googol.han.entity.Depot">
+	 SELECT * FROM googol_depot WHERE depotName=#{depotName,jdbcType=VARCHAR} or depotId=#{depotId,jdbcType=VARCHAR}
+	</select>
+	
+	
+	
+	
+	
+	<!-- 分页查询 -->
+	<select id="listpage" resultType="map" parameterType="string">
+		
+		 <![CDATA[
+            ${value} 
+          ]]>
+	</select>
+
+</mapper>

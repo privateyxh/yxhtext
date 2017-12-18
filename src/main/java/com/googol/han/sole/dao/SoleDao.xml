@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.googol.han.sole.dao.SoleDao">
+
+	
+	
+	<!-- 单位查询 -->
+	<select id="findByCompany" resultType="com.googol.han.entity.Company">
+	select * from googol_company
+	</select>
+	<!-- 员工查询 -->
+	<select id="findByUser" resultType="com.googol.han.entity.User">
+	select * from googol_user
+	</select>
+	<!-- 仓库查询 -->
+	<select id="findByDepot" resultType="com.googol.han.entity.Depot">
+	select * from googol_depot
+	</select>
+	<!-- 物品查询 -->
+	<select id="findByGoods" resultType="com.googol.han.entity.Goods">
+	select * from googol_goods
+	</select>
+	<!-- 添加销售 -->
+	<insert id="addBySole" keyProperty="soleId" parameterType="com.googol.han.entity.Sole">
+	insert into googol_sole values(
+	#{soleId},
+	#{soleDate},
+	#{companyId},
+	#{userId},
+	#{goodId},
+	#{goodName},
+	#{goodNumber},
+	#{soleExplain}
+	)	
+	</insert>
+	<!-- 查询销售单 -->
+	<select id="findBySole" resultType="com.googol.han.entity.Sole">
+	select * from googol_sole
+	</select>
+	
+	
+	
+	<!-- 分页查询 -->
+	<select id="page" resultType="map" parameterType="string">
+		
+		 <![CDATA[
+            ${value} 
+          ]]>
+	</select>
+
+</mapper>

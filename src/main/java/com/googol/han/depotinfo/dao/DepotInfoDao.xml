@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.googol.han.depotinfo.dao.DepotInfoDao">
+
+	
+	<!--查询商品  -->
+	<select id="findByGoods" resultType="com.googol.han.entity.Goods">
+	select * from googol_goods
+	</select>
+	
+	<!--查询员工  -->
+	<select id="findByUser"  resultType="com.googol.han.entity.User">
+	select * from googol_user
+	</select>
+	
+	<!--查询仓库  -->
+	<select id="findBuDepot" resultType="com.googol.han.entity.Depot">
+	select * from googol_depot
+	</select>
+		
+	<select id="findByCompany" resultType="com.googol.han.entity.Company">
+	select * from googol_company	
+	</select>
+	
+	<!--添加订单  -->
+	<insert id="addByDepotInfo"   parameterType="com.googol.han.entity.DepotInfo">
+	insert into googol_depotinfo values(
+	#{depotinfoId,jdbcType=VARCHAR},
+	#{depotDate,jdbcType=VARCHAR},
+	#{depotName,jdbcType=VARCHAR},
+	#{userId,jdbcType=VARCHAR},
+	#{depotId,jdbcType=VARCHAR},
+	#{depotInfoExplain,jdbcType=VARCHAR},
+	#{goodId,jdbcType=VARCHAR},
+	#{goodName,jdbcType=VARCHAR},
+	#{goodNumber,jdbcType=VARCHAR},
+	#{goodBidPrice,jdbcType=VARCHAR},
+	#{goodExplain,jdbcType=VARCHAR}
+	)
+	</insert>
+	
+	
+	
+		<!-- 分页查询 -->
+	<select id="page" resultType="map" parameterType="string">
+		
+		 <![CDATA[
+            ${value} 
+          ]]>
+	</select>
+	
+	<select id="finByDepotInfo" resultType="map">
+	select * from googol_depotinfo
+	</select>
+	
+
+
+
+</mapper>

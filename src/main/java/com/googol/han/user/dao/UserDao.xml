@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.googol.han.user.dao.UserDao">
+
+	
+	<select id="findAll" resultType="map">
+		select * from googol_user
+	</select>
+
+	<!-- 通过ID和name查询 -->
+	<select id="findByUserNameAndUserPassword" parameterType="com.googol.han.entity.User" resultType="com.googol.han.entity.User">
+		select * from googol_user where userName=#{userName,jdbcType=VARCHAR} and userPassword=#{userPassword,jdbcType=VARCHAR}
+	</select>
+	<!-- 查询编号 -->
+	<select id="findByUserId" parameterType="com.googol.han.entity.User" resultType="com.googol.han.entity.User">
+	select * from googol_user where userId=#{userId,jdbcType=VARCHAR}	
+	</select>	
+	<!-- 更新 -->
+	<update id="updateByUser"  keyProperty="userId" parameterType="com.googol.han.entity.User">
+	update (select * from googol_user where userId=#{userId}) set userName=#{userName},userBrither=#{userBrither},userPhone=#{userPhone},userAddress=#{userAddress},userState=#{userState},userExplain=#{userExplain},userPassword=#{userPassword}
+	</update>
+	<!-- 添加 -->
+	<insert id="addByUser"  keyProperty="userId" parameterType="com.googol.han.entity.User">
+	
+	insert into googol_user values(#{userId},#{userName},#{userBrither},#{userPhone},#{userAddress},#{userState},#{userExplain},#{userPassword})
+	</insert>
+	
+	<!-- 分页 -->
+	<select id="page" resultType="map" parameterType="string">
+		 <![CDATA[
+            ${value} 
+          ]]>
+	</select>
+
+</mapper>
